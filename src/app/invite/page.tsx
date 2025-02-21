@@ -1,12 +1,12 @@
 import Image from 'next/image'
 
-import logo from '../../../../assets/logo.svg'
+import logo from '../../../assets/logo.svg'
 import { InviteLinkInput } from './invite-link-input'
 import { Ranking } from './ranking'
 import { Stats } from './stats'
 
 export default function InvitePage() {
-  const inviteLink = 'http://localhost:3000.com/codecraft-summit-2027/invite/1'
+  const inviteLink = 'http://devstage.com/subscription/561651616515'
 
   return (
     <div className="min-h-dvh flex items-center justify-between gap-16 flex-col md:flex-row">
