@@ -1,10 +1,14 @@
 import Image from 'next/image'
 
-import medalCooper from '../../../../assets/medal-cooper.svg'
-import medalGold from '../../../../assets/medal-gold.svg'
-import medalSilver from '../../../../assets/medal-silver.svg'
+import medalCooper from '../../../assets/medal-cooper.svg'
+import medalGold from '../../../assets/medal-gold.svg'
+import medalSilver from '../../../assets/medal-silver.svg'
 
-export function Ranking() {
+interface RankingProps {
+  eventPrettyName: string
+}
+
+export function Ranking({ eventPrettyName }: RankingProps) {
   return (
     <div className="w-full max-w-[440px] space-y-5">
       <h2 className="text-gray-200 text-xl font-heading font-semibold leading-none">

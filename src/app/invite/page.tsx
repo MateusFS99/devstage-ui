@@ -1,12 +1,17 @@
+'use client'
+
 import Image from 'next/image'
 
-import logo from '../../../../assets/logo.svg'
+import { useSearchParams } from 'next/navigation'
+import logo from '../../../assets/logo.svg'
 import { InviteLinkInput } from './invite-link-input'
 import { Ranking } from './ranking'
 import { Stats } from './stats'
 
 export default function InvitePage() {
-  const inviteLink = 'http://localhost:3000.com/codecraft-summit-2027/invite/1'
+  const eventPrettyName = useSearchParams().get('event')
+  const subscriberId = useSearchParams().get('subscriberId')
+  const inviteLink = `http://localhost:3000?event=${eventPrettyName}&referrer=${subscriberId}`
 
   return (
     <div className="min-h-dvh flex items-center justify-between gap-16 flex-col md:flex-row">
@@ -36,11 +41,14 @@ export default function InvitePage() {
 
           <InviteLinkInput inviteLink={inviteLink} />
 
-          <Stats />
+          <Stats
+            eventPrettyName={eventPrettyName!}
+            subscriberId={subscriberId!}
+          />
         </div>
       </div>
 
-      <Ranking />
+      <Ranking eventPrettyName={eventPrettyName!} />
     </div>
   )
 }
