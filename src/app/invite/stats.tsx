@@ -9,13 +9,18 @@ interface StatsProps {
   subscriberId: string
 }
 
+interface Stats {
+  indications: number
+  position: number
+}
+
 export function Stats({ eventPrettyName, subscriberId }: StatsProps) {
-  const [stats, setStats] = useState<any>()
+  const [stats, setStats] = useState<Stats>()
 
   useEffect(() => {
     getUserEventStats(eventPrettyName, Number(subscriberId)).then(res => {
       if (res.message) console.error(res.message)
-      else setStats(res)
+      else setStats(res as unknown as Stats)
     })
   }, [eventPrettyName, subscriberId])
 
