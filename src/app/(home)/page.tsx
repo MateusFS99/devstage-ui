@@ -65,11 +65,7 @@ export default function Home() {
             </div>
 
             <p className="text-gray-300 leading-relaxed text-sm md:text-base">
-              Um evento feito por e para pessoas desenvolvedoras apaixonadas por
-              criar soluções inovadoras e compartilhar conhecimento. Vamos
-              mergulhar nas tendências mais recentes em desenvolvimento de
-              software, arquitetura de sistemas e tecnologias emergentes, com
-              palestras, workshops e hackathons.
+              {event.description}
               <br />
               <br />
               Datas: {formatDisplayDate(event.startDate!, event.endDate!)}

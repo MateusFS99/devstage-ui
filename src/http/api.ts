@@ -14,6 +14,7 @@ export interface User {
 export interface Event {
   eventId?: number
   title?: string
+  description?: string
   prettyName?: string
   location?: string
   price?: number
