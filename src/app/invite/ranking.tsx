@@ -1,9 +1,6 @@
 import Image from 'next/image'
 
 import type RankingInterface from '@/models/interfaces/ranking'
-import medalCooper from '../../../assets/medal-cooper.svg'
-import medalGold from '../../../assets/medal-gold.svg'
-import medalSilver from '../../../assets/medal-silver.svg'
 
 interface RankingProps {
   ranking: RankingInterface[]
@@ -21,9 +18,9 @@ export function Ranking({ ranking }: RankingProps) {
           const rankingPosition = index + 1
 
           const medalsRanking = {
-            1: medalGold,
-            2: medalSilver,
-            3: medalCooper,
+            1: '/medal-gold.svg',
+            2: '/medal-silver.svg',
+            3: '/medal-cooper.svg',
           }
 
           return (

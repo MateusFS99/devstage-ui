@@ -1,49 +1,48 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { generateRankingByEvent, getUserEventStats } from "@/http/api";
-import type RankingInterface from "@/models/interfaces/ranking";
-import type StatsInterface from "@/models/interfaces/stats";
-import logo from "../../../assets/logo.svg";
-import { InviteLinkInput } from "./invite-link-input";
-import { Ranking } from "./ranking";
-import { Stats } from "./stats";
+import { generateRankingByEvent, getUserEventStats } from '@/http/api'
+import type RankingInterface from '@/models/interfaces/ranking'
+import type StatsInterface from '@/models/interfaces/stats'
+import Image from 'next/image'
+import { useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { InviteLinkInput } from './invite-link-input'
+import { Ranking } from './ranking'
+import { Stats } from './stats'
 
 export default function InviteContent() {
-  const searchParams = useSearchParams();
-  const eventPrettyName = searchParams.get("event");
-  const subscriberId = searchParams.get("subscriberId");
-  const inviteLink = `http://localhost:3000?event=${eventPrettyName}&referrer=${subscriberId}`;
+  const searchParams = useSearchParams()
+  const eventPrettyName = searchParams.get('event')
+  const subscriberId = searchParams.get('subscriberId')
+  const inviteLink = `http://localhost:3000?event=${eventPrettyName}&referrer=${subscriberId}`
 
-  const [ranking, setRanking] = useState<RankingInterface[]>();
-  const [stats, setStats] = useState<StatsInterface>();
+  const [ranking, setRanking] = useState<RankingInterface[]>()
+  const [stats, setStats] = useState<StatsInterface>()
 
   useEffect(() => {
     if (eventPrettyName && subscriberId) {
-      getUserEventStats(eventPrettyName, Number(subscriberId)).then((res) => {
-        if (res.message) console.error(res.message);
-        else setStats(res as unknown as StatsInterface);
-      });
+      getUserEventStats(eventPrettyName, Number(subscriberId)).then(res => {
+        if (res.message) console.error(res.message)
+        else setStats(res as unknown as StatsInterface)
+      })
     }
-  }, [eventPrettyName, subscriberId]);
+  }, [eventPrettyName, subscriberId])
 
   useEffect(() => {
     if (eventPrettyName) {
-      generateRankingByEvent(eventPrettyName).then((res) => {
-        if (res.message) console.error(res.message);
-        else setRanking(res as unknown as RankingInterface[]);
-      });
+      generateRankingByEvent(eventPrettyName).then(res => {
+        if (res.message) console.error(res.message)
+        else setRanking(res as unknown as RankingInterface[])
+      })
     }
-  }, [eventPrettyName]);
+  }, [eventPrettyName])
 
   return (
     ranking?.length !== 0 &&
     stats?.indications && (
       <div className="min-h-dvh flex items-center justify-between gap-16 flex-col md:flex-row">
         <div className="flex flex-col gap-10 w-full max-w-[550px]">
-          <Image src={logo} alt="devstage" width={108.5} height={30} />
+          <Image src="/logo.svg" alt="devstage" width={108.5} height={30} />
 
           <div className="space-y-2">
             <h1 className="text-4xl font-semibold font-heading text-gray-100 leading-none">
@@ -75,5 +74,5 @@ export default function InviteContent() {
         <Ranking ranking={ranking!} />
       </div>
     )
-  );
+  )
 }
