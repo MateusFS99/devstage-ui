@@ -7,13 +7,11 @@ import { Radio } from 'lucide-react'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import logo from '../../../assets/logo.svg'
 import { SubscriptionForm } from './subscription-form'
 
 export default function HomeContent() {
   const searchParams = useSearchParams()
   const eventPrettyName = searchParams.get('event')
-  const referrer = searchParams.get('referrer')
   const [event, setEvent] = useState<Event>()
 
   useEffect(() => {
@@ -45,7 +43,7 @@ export default function HomeContent() {
     event?.title && (
       <div className="min-h-dvh flex flex-col justify-center gap-16">
         <div className="flex flex-col gap-8 items-center md:items-start">
-          <Image src={logo} alt="devstage" width={108.5} height={30} />
+          <Image src="/logo.svg" alt="devstage" width={108.5} height={30} />
 
           <h1 className="text-4xl text-center leading-none font-heading font-medium flex flex-col md:text-7xl md:text-left">
             <span className="text-blue">{getFirstWord(event.title!)}</span>

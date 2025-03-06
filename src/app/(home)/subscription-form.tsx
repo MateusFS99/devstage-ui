@@ -2,6 +2,7 @@
 
 import Button from '@/components/button'
 import { InputField, InputIcon, InputRoot } from '@/components/input'
+import { createSubscription, createSubscription1 } from '@/http/api'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ArrowRight, Mail, User } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
@@ -18,6 +19,8 @@ type SubscriptionSchema = z.infer<typeof subscriptionSchema>
 export function SubscriptionForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const eventPrettyName = searchParams.get('event')
+  const referrer = searchParams.get('referrer')
 
   const {
     register,
@@ -27,10 +30,22 @@ export function SubscriptionForm() {
     resolver: zodResolver(subscriptionSchema),
   })
 
-  function submitForm(data: SubscriptionSchema) {
-    const referrer = searchParams.get('referrer')
+  function subscriptionResult(res: any) {
+    if (res.message) return
+    router.push(
+      `/invite?event=${eventPrettyName}&subscriberId=${res.subscriber.id}`
+    )
+  }
 
-    router.push('/invite/1')
+  function submitForm(data: SubscriptionSchema) {
+    if (referrer)
+      createSubscription1(eventPrettyName!, Number(referrer), data).then(res =>
+        subscriptionResult(res)
+      )
+    else
+      createSubscription(eventPrettyName!, data).then(res =>
+        subscriptionResult(res)
+      )
   }
 
   return (
