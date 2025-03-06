@@ -12,7 +12,6 @@ import { SubscriptionForm } from './subscription-form'
 export default function HomeContent() {
   const searchParams = useSearchParams()
   const eventPrettyName = searchParams.get('event')
-  const referrer = searchParams.get('referrer')
   const [event, setEvent] = useState<Event>()
 
   useEffect(() => {
